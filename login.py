@@ -1,7 +1,6 @@
 from ast import main
 from  tkinter import*
 from tkinter import ttk
-# from webbrowser import get
 from tkinter import messagebox
 
 from PIL import Image, ImageTk #pip install pillow
@@ -74,7 +73,7 @@ class Login_window:
         #forgot password
         forgetbtn = Button(frame, text="Forgot Password ?", font=("times new roman", 10, "bold"),borderwidth=0, relief=RIDGE, fg="white", bg="black",activeforeground="white",activebackground="black" )
         forgetbtn.place(x=10, y=370,width=160)
-        
+
     #logic of login
     def login(self):
         if self.txtuser.get()=="" or self.txtpass.get()=="":
