@@ -10,7 +10,7 @@ class Login_window:
         self.root.title ("Login")
         self.root.geometry("1550x800+0+0")
 
-        self.bg = ImageTk.PhotoImage(file=r"D:\Projects\Hero Overseas\bg.jpg")
+        self.bg = ImageTk.PhotoImage(file=r"D:\Projects\Hero Overseas\bgin.jpg")
         lbl_bg  = Label(self.root,image= self.bg)
         lbl_bg.place(x =0, y=0, relwidth=1, relheight=1)
 
@@ -48,7 +48,7 @@ class Login_window:
 
         #----Icon Images--
         #for username
-        img2 = Image.open(r"D:\Projects\Hero Overseas\uicon.jpg")
+        img2 = Image.open(r"D:\Projects\Hero Overseas\uicon.png")
         img2 = img2.resize((25, 25), Image.ANTIALIAS) 
         self.photoimage2 = ImageTk.PhotoImage(img2)
 
@@ -69,7 +69,7 @@ class Login_window:
 
         #register buttons
         registerbtn = Button(frame, text="New User Register", font=("times new roman", 10, "bold"),borderwidth=0, relief=RIDGE, fg="white", bg="black",activeforeground="white",activebackground="black" )
-        registerbtn.place(x=14, y=350,width=160)
+        registerbtn.place(x=13, y=350,width=160)
         #forgot password
         forgetbtn = Button(frame, text="Forgot Password ?", font=("times new roman", 10, "bold"),borderwidth=0, relief=RIDGE, fg="white", bg="black",activeforeground="white",activebackground="black" )
         forgetbtn.place(x=10, y=370,width=160)
