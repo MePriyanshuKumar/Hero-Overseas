@@ -83,6 +83,9 @@ class Login_window:
         forgetbtn = Button(frame, text="Forgot Password ?",command=self.forgot_password_window, font=("Anton", 10, "bold"),borderwidth=0, relief=RIDGE, fg="white", bg="black",activeforeground="white",activebackground="black" )
         forgetbtn.place(x=10, y=370,width=160)
 
+
+
+
     #register window opening after selcting register btn
     def register_window(self):
         self.new_window = Toplevel(self.root)
@@ -95,10 +98,10 @@ class Login_window:
         elif self.txtuser.get() =="herooverseas@gmail.com" and self.txtpass.get()=="priyanshu@overseas":
             messagebox.showinfo("Success!" ,"Welcome to herooverseas!")
         else:
-            #connectin mysql databse in login page so that we can fetdch the email and password from register user db
+            #connecting mysql database in login page so that we can fetch the email and password from register user db
             conn = mysql.connector.connect(host = "localhost", user = "root",password ="root@123",database = "herooverseas")
             my_cursor = conn.cursor()
-            my_cursor.execute("SELECT * FROM register where email = %s and password = %s",(self.var_email.get(),self.var_pass.get()))
+            my_cursor.execute("SELECT * FROM register where email = %s and password = %s",(self.txtuser.get(),self.txtpass.get()))
 
             row  = my_cursor.fetchone()
             if row != None:
@@ -114,7 +117,37 @@ class Login_window:
             conn.commit()
             conn.close()                
 
-            # =======================ForgotPasswordWindow================================================================
+
+   #========================Reset Password =============================
+    def reset_pass(self):
+        if self.txt_contact.get() =="" and self.txt_new_password.get() =="":
+            messagebox.showerror("Error","Select the Phone number and new password to reset your password")
+        else:
+            conn = mysql.connector.connect(host = "localhost", user = "root",password ="root@123",database = "herooverseas")
+            my_cursor = conn.cursor()
+            qury=("SELECT * FROM register WHERE email=%s and contact=%s")
+            vlue = (self.txtuser.get(), self.txt_contact.get())
+            my_cursor.execute(qury,vlue)
+            row = my_cursor.fetchone()
+            if row == None:
+                messagebox.showerror("Error", "Please enter the correct Phone number")
+            else:
+                query = ("UPDATE register SET password=%s WHERE email=%s")
+                value = (self.new_password.get(),self.txtuser.get())
+                my_cursor.execute(query,value)
+                
+                conn.commit()
+                conn.close()
+                messagebox.showinfo("Success", "Your password has been reset, please login with new password!")
+
+
+
+
+
+
+
+
+   # =======================ForgotPasswordWindow================================================================
                 
     def forgot_password_window(self):
         if self.txtuser.get() == "":
@@ -153,8 +186,10 @@ class Login_window:
                 self.new_password = ttk.Entry(self.root2,font=("Anton", 15))
                 self.new_password.place(x=50, y=200, width=250)
                 
-                btn = Button(self.root2,text = "Reset",font=("Anton", 15,"bold"),fg="white", bg= "green")
+                btn = Button(self.root2,text = "Reset",command = self.reset_pass,font=("Anton", 15,"bold"),fg="white", bg= "green")
                 btn.place(x=50, y=280)
+
+
 
                         
 
@@ -263,6 +298,11 @@ class Register:
             "Anton", 15, "bold"), bg="white", fg="black")
         b1.place(x=330, y=380, width=200)
 
+
+
+
+
+
         # ===== Function declarations =====
 
     def register_data(self):
@@ -291,5 +331,8 @@ class Register:
                 conn.close()
                 messagebox.showinfo("Success!", "Register successfully")
 
+
 if __name__ == "__main__":
     main()
+
+    
