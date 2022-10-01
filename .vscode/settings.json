@@ -3,6 +3,7 @@
         "borderwidth",
         "relheight",
         "relwidth",
+        "tearoff",
         "textvariable"
     ],
     "python.testing.pytestArgs": [
